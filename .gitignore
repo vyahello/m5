@@ -1,0 +1,15 @@
+# Python virtualenv (regenerable: python -m venv venv && pip install esptool pyserial)
+venv/
+.venv/
+
+# Editor / tooling
+.idea/
+.claude/
+
+# Large firmware binaries — keep out of version control.
+# (App image + full device snapshots; see docs/03-flashing-bruce.md to recreate.)
+firmware/*.bin
+
+# Python caches
+__pycache__/
+*.pyc
