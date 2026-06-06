@@ -12,7 +12,8 @@ Docs in `docs/`, helper scripts in `tools/`, JS apps in `apps/`, firmware in
 ## Repo layout
 
 ```
-docs/      01-device · 02-connecting · 03-flashing-bruce · 04-using-bruce · 05-troubleshooting
+docs/      01-device · 02-connecting · 03-flashing-bruce · 04-using-bruce ·
+           05-troubleshooting · 06-pentesting · 07-tips-and-tricks
 firmware/  Bruce-m5stack-cplus2.bin   (Bruce 1.15, StickC Plus2, flash @ 0x0)
 tools/     free-port.sh bruce-cmd.sh bruce-shell.sh bruce-put.sh bruce-rm.sh melody.sh
 apps/      hello.js demo.js watchface.js wifi-connect.js + games/

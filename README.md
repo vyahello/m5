@@ -23,7 +23,9 @@ m5/
 │   ├── 02-connecting.md
 │   ├── 03-flashing-bruce.md
 │   ├── 04-using-bruce.md     # main usage reference
-│   └── 05-troubleshooting.md
+│   ├── 05-troubleshooting.md
+│   ├── 06-pentesting.md      # pentest field guide (Wi-Fi/BLE/IR + add-ons)
+│   └── 07-tips-and-tricks.md # get the most out of the device
 ├── firmware/
 │   └── Bruce-m5stack-cplus2.bin   # Bruce 1.15, StickC Plus2 (flash @ 0x0)
 ├── tools/                    # serial helper scripts (use the venv automatically)
@@ -73,3 +75,5 @@ a running script. See [docs/05-troubleshooting.md](docs/05-troubleshooting.md).
 3. [Flashing Bruce](docs/03-flashing-bruce.md) — esptool, the image, partitions, backup
 4. [Using Bruce](docs/04-using-bruce.md) — menus, serial CLI, web UI, Wi-Fi, clock, JS scripting, games
 5. [Troubleshooting](docs/05-troubleshooting.md) — the common failure modes
+6. [Pentesting](docs/06-pentesting.md) — Wi-Fi/BLE/IR attacks, on-LAN MITM, exfil, add-on modules, engagement workflow
+7. [Tips & tricks](docs/07-tips-and-tricks.md) — port rules, battery, scripting, backups, getting max value
