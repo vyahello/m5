@@ -9,6 +9,13 @@ driven over USB serial from this Kali machine. Bruce-focused: flashing → usage
 Docs in `docs/`, helper scripts in `tools/`, JS apps in `apps/`, firmware in
 `firmware/`.
 
+> ⚠️ **Educational / authorized use only.** This workspace exists for the owner's
+> own cybersecurity learning and for **authorized** penetration-testing engagements
+> (signed scope). The offensive features here — Evil Portal credential capture,
+> deauth/netcut, responder/LLMNR poisoning, handshake sniffing/brucegotchi, ARP
+> spoofing — are to be run **only** against the owner's own lab devices/networks or
+> targets with explicit written permission. Not for use against third parties.
+
 ## Repo layout
 
 ```
@@ -52,9 +59,14 @@ relative file args (e.g. `apps/hello.js`).
 - `bruce-shell.sh` — interactive serial console (pyserial miniterm). Exit Ctrl-].
 - `bruce-put.sh <local> <device-path>` — upload a file (handles Bruce's
   `storage write -size N` + `EOF` line protocol).
-- `bruce-get.sh <device-path> [local-dest]` — download a file FROM the device via
-  the Web UI `/file?action=download` (binary-safe: pcaps, dumps). Auto-detects IP
-  over serial + auto-starts webui; env `IP`/`WEBUSER`/`WEBPASS`/`FS`/`NOSTART`.
+- `bruce-get.sh [--serial|--flash] <device-path> [local-dest]` — download a file
+  FROM the device. Default **web** mode = Web UI `/file?action=download`
+  (binary-safe; auto-detects IP over serial + auto-starts webui; env
+  `IP`/`WEBUSER`/`WEBPASS`/`FS`/`NOSTART`). **`--serial`** = `storage read` over
+  USB, **no Wi-Fi**, **text-only** (truncates at NUL + size cap; refuses binary
+  w/o `--force`; strips `\r`). **`--flash`** = **binary-safe + no Wi-Fi**: esptool
+  dumps the LittleFS partition (cached `/tmp/bruce-littlefs.bin`, `--redump` to
+  refresh) + littlefs-python extracts — byte-exact, the way to pull pcaps over USB.
 - `bruce-rm.sh <device-path> [...]` — delete file(s) (`storage remove -filepath`).
 - `melody.sh [twinkle|mario|zelda|scale|"C4:300 ..."]` — play tunes on the buzzer.
 
@@ -85,6 +97,16 @@ relative file args (e.g. `apps/hello.js`).
   (curl: POST `/login` then use the `BRUCESESSION` cookie on `/cm`). Good for file
   management; its **Run button 400s** (launch scripts via serial/device instead);
   `/cm` returns "queued", not command output.
+- **Exfil / pulling files off:** serial `storage read` is **text-only** (Bruce's
+  `readString()` truncates at the first NUL → corrupts binary; small size cap →
+  "File is too big"). Three routes, use `bruce-get.sh`: web mode (Web UI
+  `/file?action=download`, binary-safe), `--serial` (USB, text-only), **`--flash`**
+  (**binary loot over USB, no Wi-Fi**: esptool dumps the LittleFS partition
+  `read-flash 0x4f0000 0x300000` + **littlefs-python** `block_size=4096` extracts —
+  byte-exact, verified to recover pcaps). Handshakes
+  save to `/BrucePCAP/handshakes/HS_<BSSID>_<SSID>.pcap`; crack on Kali with
+  `aircrack-ng`/`hashcat -m 22000`. Loot dir `loot/` + `*.pcap`/`*_creds.csv` are
+  gitignored.
 
 ## Apps on device (`/scripts`) and in `apps/`
 

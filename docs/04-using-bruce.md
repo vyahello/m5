@@ -371,7 +371,7 @@ Bruce commands, not Python.
 | `./tools/free-port.sh` | release `/dev/ttyACM0` from any monitor before flashing/CLI |
 | `./tools/bruce-cmd.sh <cmd>` | send a Bruce serial command and print the reply |
 | `./tools/bruce-put.sh <local> <device-path>` | upload a file (e.g. a `.js` script) to Bruce storage |
-| `./tools/bruce-get.sh <device-path> [local-dest]` | download a file from the device via the Web UI (binary-safe — pcaps, dumps) |
+| `./tools/bruce-get.sh [--serial\|--flash] <device-path> [local-dest]` | download a file from the device — Web UI (binary-safe, default), `--serial` over USB (text-only, no Wi-Fi), or `--flash` (binary-safe over USB via LittleFS dump, no Wi-Fi) |
 | `./tools/bruce-rm.sh <device-path> [...]` | delete one or more files from Bruce storage |
 | `./tools/bruce-shell.sh` | interactive serial console — type commands live (exit: Ctrl-]) |
 | `./tools/melody.sh [twinkle\|mario\|zelda\|scale\|"C4:300 ..."]` | play a melody on the buzzer via `tone` |

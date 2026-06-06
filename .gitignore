@@ -13,3 +13,12 @@ firmware/*.bin
 # Python caches
 __pycache__/
 *.pyc
+
+# Loot / captures pulled off the device (bruce-get.sh default dest) — client
+# evidence: handshakes, creds, dumps. NEVER commit. Exfil locally, handle per scope.
+loot/
+*.pcap
+*.cap
+*.hc22000
+*_creds.csv
+loot/
