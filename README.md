@@ -33,11 +33,13 @@ m5/
 │   ├── bruce-cmd.sh          # send one command, print reply
 │   ├── bruce-shell.sh        # interactive serial console
 │   ├── bruce-put.sh          # upload a file to the device
+│   ├── bruce-get.sh          # download a file from the device (Web UI, binary-safe)
 │   ├── bruce-rm.sh           # delete file(s) on the device
 │   └── melody.sh             # play tunes on the buzzer
 ├── apps/                     # JavaScript apps for the device (run via Bruce JS)
 │   ├── hello.js  demo.js  watchface.js  wifi-connect.js
 │   └── games/                # pingpong, dino, space_shooter, arcade-games, ...
+├── portals/                  # Evil Portal HTML templates (upload to /PortalTemplates)
 └── venv/                     # esptool + pyserial
 ```
 

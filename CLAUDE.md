@@ -52,6 +52,9 @@ relative file args (e.g. `apps/hello.js`).
 - `bruce-shell.sh` — interactive serial console (pyserial miniterm). Exit Ctrl-].
 - `bruce-put.sh <local> <device-path>` — upload a file (handles Bruce's
   `storage write -size N` + `EOF` line protocol).
+- `bruce-get.sh <device-path> [local-dest]` — download a file FROM the device via
+  the Web UI `/file?action=download` (binary-safe: pcaps, dumps). Auto-detects IP
+  over serial + auto-starts webui; env `IP`/`WEBUSER`/`WEBPASS`/`FS`/`NOSTART`.
 - `bruce-rm.sh <device-path> [...]` — delete file(s) (`storage remove -filepath`).
 - `melody.sh [twinkle|mario|zelda|scale|"C4:300 ..."]` — play tunes on the buzzer.
 
