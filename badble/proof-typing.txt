@@ -1,0 +1,11 @@
+REM ===================================================================
+REM proof-typing.txt - universal Bad-BLE keystroke-injection proof
+REM Authorized LOCAL LAB test only (your own devices).
+REM
+REM Precondition: target paired to the M5 BLE keyboard, UNLOCKED, with a
+REM   text field focused (open Notes and tap the page, or any input box).
+REM Result: a labelled line is typed into that field. Nothing else.
+REM ===================================================================
+DELAY 3000
+STRING [BadBLE PoC] BLE HID keystroke injection OK -- authorized lab test
+ENTER

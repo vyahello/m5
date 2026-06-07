@@ -1,0 +1,16 @@
+REM ===================================================================
+REM notes-demo.txt - types a short multi-line authorized-test notice
+REM Authorized LOCAL LAB test only (your own devices).
+REM
+REM Precondition: open the Notes app (iOS) or any notes/text editor
+REM   (Android), tap into a new note so the cursor is blinking, phone
+REM   UNLOCKED and paired to the M5 BLE keyboard.
+REM Result: three benign lines are typed. No payload, no exfil.
+REM ===================================================================
+DELAY 3000
+STRING This device accepted BLE HID keyboard input.
+ENTER
+STRING Source: M5StickC Plus2 / Bruce Bad-BLE.
+ENTER
+STRING Authorized lab test only -- no payload executed.
+ENTER

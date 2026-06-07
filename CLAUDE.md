@@ -27,6 +27,7 @@ tools/     free-port.sh bruce-cmd.sh bruce-shell.sh bruce-put.sh bruce-get.sh
            bruce-rm.sh portals-set-ap.sh melody.sh
 apps/      hello.js demo.js watchface.js wifi-connect.js + games/
 portals/   Evil Portal HTML templates (→ /PortalTemplates on the device)
+badble/    Bad-BLE HID duckyscript payloads (phone testing; benign, lab-safe)
 venv/      esptool v5.3.0 + pyserial — gitignored
 loot/      captures pulled off the device — gitignored (client evidence)
 ```

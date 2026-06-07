@@ -1,0 +1,11 @@
+REM ===================================================================
+REM android-search.txt - type into the Google search box / launcher
+REM Authorized LOCAL LAB test only (your own devices).
+REM
+REM Precondition: Android phone UNLOCKED + paired to the M5 BLE keyboard,
+REM   the Google Search widget or launcher search field TAPPED/focused.
+REM Result: types a harmless query and submits it.
+REM ===================================================================
+DELAY 2500
+STRING what time is it
+ENTER

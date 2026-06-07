@@ -61,7 +61,8 @@ The bare Plus2's real arsenal is **Wi-Fi + BLE + IR** — no add-on modules need
 - **Wi-Fi** — recon/scan, deauth, beacon spam, **Evil Portal** credential capture,
   Karma, handshake/PMKID sniffing, and on-LAN tools (ARP poison, NetCut, Responder,
   TCP/Telnet/SSH, WireGuard, SOCKS proxy) once you join a network.
-- **BLE** — scan, advert spam, **HID keyboard** injection, media hijack.
+- **BLE** — scan, advert spam, **HID keyboard** injection (lab payloads in
+  [`badble/`](badble/)), media hijack.
 - **IR** — TV-B-Gone, capture & replay remotes.
 
 Sub-GHz, RFID/NFC, NRF24, GPS, LoRa, FM appear in the menus but need cheap add-on
@@ -109,6 +110,7 @@ m5/
 ├── tools/       serial helper scripts (use the venv automatically)
 ├── apps/        JavaScript apps + games for the device
 ├── portals/     Evil Portal HTML templates (→ /PortalTemplates on the device)
+├── badble/      Bad-BLE HID payloads for phone testing (benign, lab-safe)
 ├── firmware/    Bruce build + full device snapshot  (*.bin gitignored — large)
 ├── loot/        captures pulled off the device       (gitignored — client evidence)
 └── venv/        esptool + pyserial                   (gitignored — regenerable)

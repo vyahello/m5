@@ -1,0 +1,15 @@
+REM ===================================================================
+REM ios-spotlight.txt - drive Spotlight via the Command key
+REM Authorized LOCAL LAB test only (your own devices).
+REM
+REM Precondition: iPadOS (reliable) or newer iPhone UNLOCKED + paired,
+REM   sitting on the Home Screen. Cmd+Space opens Spotlight search.
+REM   NOTE: external-keyboard Cmd+Space is reliable on iPadOS; on iPhone
+REM   hardware-keyboard shortcuts are limited and may not trigger.
+REM Result: opens Spotlight and searches a harmless term.
+REM ===================================================================
+DELAY 2500
+GUI SPACE
+DELAY 800
+STRING weather
+ENTER

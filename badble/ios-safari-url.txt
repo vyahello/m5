@@ -1,0 +1,12 @@
+REM ===================================================================
+REM ios-safari-url.txt - open a benign URL in Safari (iPhone/iPad)
+REM Authorized LOCAL LAB test only (your own devices).
+REM
+REM Precondition: iPhone/iPad UNLOCKED + paired to the M5 BLE keyboard,
+REM   Safari open, the address bar TAPPED so the cursor is in it.
+REM Result: navigates to example.com. Edit the STRING to your lab URL
+REM   (e.g. a page on your own machine: http://192.168.1.50/test).
+REM ===================================================================
+DELAY 3000
+STRING example.com
+ENTER

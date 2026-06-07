@@ -1,0 +1,11 @@
+REM ===================================================================
+REM android-browser-url.txt - open a benign URL in Chrome (Android)
+REM Authorized LOCAL LAB test only (your own devices).
+REM
+REM Precondition: Android phone UNLOCKED + paired to the M5 BLE keyboard,
+REM   Chrome open, the omnibox (address bar) TAPPED so the cursor is in it.
+REM Result: navigates to example.com. Edit the STRING to your lab URL.
+REM ===================================================================
+DELAY 3000
+STRING example.com
+ENTER
