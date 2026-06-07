@@ -25,20 +25,60 @@ Bad-BLE against a phone is much more limited than USB BadUSB against a laptop:
 So these scripts demonstrate *injection into whatever field is focused* and let you
 test the pairing/lock posture of your devices — not silent remote code execution.
 
+## Platform support (verified on this unit)
+
+The M5StickC Plus2 is a **classic ESP32 (BLE 4.2)**, and that determines who pairs:
+
+| Platform | Bad-BLE / BLE-keyboard HID | Why |
+|----------|----------------------------|-----|
+| **Android** | ✅ pairs & types | lenient about BLE-HID peripherals |
+| **Windows / Linux** | ✅ usually | accept standard BLE-HID |
+| **iPhone / iPad** | ❌ won't enumerate it | iOS is strict about BLE-HID bonding/appearance; the ESP32 HID stack doesn't satisfy it |
+
+Verified here: the stick advertises as **`Keyboard_xxxxx`** — **Android sees and pairs
+it; iPhones never list it.** This is a known classic-ESP32 + iOS limitation, fixable
+only in firmware (you'd need an **ESP32-S3** or **nRF52840** board for iOS HID). It's
+itself a reportable finding: *iOS resists the rogue BLE-HID keyboard; Android doesn't.*
+
+> **Why BLE spam still works on iPhones but the keyboard doesn't:** spam is
+> **advertising** (connectionless broadcast — iOS just *hears* a packet and pops a
+> dialog), whereas the keyboard needs a **bonded, encrypted HID connection** that iOS
+> gates strictly. Advert-based BLE (spam, beacons, SourApple) → works on iOS;
+> connection/HID-based BLE (Bad-BLE) → Android only on this chip.
+
+**Bottom line: do your Bad-BLE testing on Android.**
+
 ## The payloads
 
-| File | Target | Precondition (have this on screen, unlocked) | Does |
-|------|--------|----------------------------------------------|------|
-| `proof-typing.txt` | iOS + Android | any text field focused (Notes) | types one labelled proof line |
-| `notes-demo.txt` | iOS + Android | a new note, cursor blinking | types a 3-line authorized-test notice |
-| `ios-safari-url.txt` | iPhone/iPad | Safari open, address bar tapped | navigates to `example.com` |
-| `ios-spotlight.txt` | iPadOS (best) / newer iPhone | Home Screen | Cmd+Space → Spotlight → search `weather` |
-| `android-browser-url.txt` | Android | Chrome open, omnibox tapped | navigates to `example.com` |
-| `android-search.txt` | Android | Google search/launcher field focused | types & submits a harmless query |
+All are plain duckyscript (`REM` comments, `DELAY` ms, `STRING`, `ENTER`, `GUI`=Meta/
+Cmd, `CTRL`). Edit the `STRING` lines freely — e.g. point a URL at your own box
+(`http://192.168.1.50/test`).
 
-All are plain duckyscript (`REM` comments, `DELAY` ms, `STRING`, `ENTER`,
-`GUI`=Cmd). Edit the `STRING` lines freely — e.g. point a URL payload at a page on
-**your own** machine (`http://192.168.1.50/test`).
+**Field-focused** — you open the app/field, the script types into it (iOS + Android):
+
+| File | Target | Precondition (unlocked) | Does |
+|------|--------|-------------------------|------|
+| `proof-typing.txt` | iOS + Android | any text field focused | types one labelled proof line |
+| `notes-demo.txt` | iOS + Android | a new note, cursor blinking | types a 3-line notice |
+| `ios-safari-url.txt` | iPhone/iPad | Safari open, address bar tapped | navigates to `example.com` |
+| `ios-spotlight.txt` | iPadOS / newer iPhone | Home Screen | Cmd+Space → Spotlight search |
+| `android-browser-url.txt` | Android | Chrome open, omnibox tapped | navigates to `example.com` |
+| `android-search.txt` | Android | search field focused | submits a harmless query |
+
+**Self-contained (Android)** — the script *opens the app itself*; only precondition is
+**unlocked + on the home screen**. No taps from you:
+
+| File | Does | Technique |
+|------|------|-----------|
+| `android-browser-video.txt` | opens browser + new tab, loads a URL you set (blank by default) | `GUI b` (Meta+B) → `CTRL t` → type URL |
+| `android-app-launch.txt` | opens an app by name (set to Chrome) | type on home screen → launcher search → `ENTER` |
+| `android-notes-write.txt` | opens Google Keep and types a note | launcher-search "Keep" → type |
+
+> **Android shortcuts vary by OEM/launcher.** `GUI b`=open-browser and home-screen
+> type-to-search work on stock/Pixel/Nova but not everywhere — if one method is dead
+> on your device, use the other (Meta-key vs launcher-search). Bump the `DELAY` values
+> for slow phones. These are the *robust, hands-off* payloads — but they're the most
+> device-dependent, so tune per phone.
 
 ## Deploy to the device
 
@@ -56,10 +96,12 @@ for f in badble/*.txt; do ./tools/bruce-put.sh "$f" "/BadBLE/$(basename "$f")"; 
 
 1. **BLE → Bad BLE** → pick the script (e.g. `/BadBLE/proof-typing.txt`).
 2. The stick starts **advertising as a BLE keyboard**.
-3. On the target phone: **Settings → Bluetooth**, find the keyboard, **pair** it
-   (accept the prompt). Make sure the phone is **unlocked** with the required app /
-   field focused (see the table).
-4. Bruce types the script. Watch the field on the phone.
+3. On the target phone: **Settings → Bluetooth**, find **`Keyboard_xxxxx`**, **pair**
+   it (accept the prompt). Keep the phone **unlocked** and then:
+   - *Field-focused scripts* → open the required app/field (see the table).
+   - *Self-contained scripts* → just sit on the **home screen**; the script opens the
+     app itself.
+4. Bruce types the script. Watch the phone.
 
 ## Suggested test matrix (record results per device)
 

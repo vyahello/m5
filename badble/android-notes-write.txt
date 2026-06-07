@@ -1,0 +1,26 @@
+REM ===================================================================
+REM android-notes-write.txt - SELF-CONTAINED: open Google Keep and type
+REM Authorized LOCAL LAB test only (your own Android device).
+REM
+REM Precondition: Android UNLOCKED + paired, on the HOME SCREEN, Google Keep
+REM   installed, launcher opens app search on type (Pixel/Nova/stock).
+REM   (Samsung Notes / another app? change "Keep" below to its name.)
+REM
+REM Flow:
+REM   1. home-search "Keep" + Enter -> opens Google Keep
+REM   2. Keep opens on the notes list; its search/new-note field varies, so
+REM      this types into the focused field to prove autonomous input.
+REM
+REM NOTE: Android has no universal "new note" keyboard shortcut, so focusing
+REM   a fresh note is app/version dependent. If text lands in Keep's SEARCH
+REM   box instead of a note, that still proves keystroke injection - tune the
+REM   steps/delays for your device, or just use the browser demo which is the
+REM   most reliable autonomous "open + write" on Android.
+REM ===================================================================
+DELAY 2500
+STRING Keep
+DELAY 1500
+ENTER
+DELAY 4500
+STRING BadBLE lab test -- keystrokes injected with no user action
+ENTER

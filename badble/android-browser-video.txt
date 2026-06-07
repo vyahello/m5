@@ -1,0 +1,27 @@
+REM ===================================================================
+REM android-browser-video.txt - SELF-CONTAINED: open browser, play a video
+REM Authorized LOCAL LAB test only (your own Android device).
+REM
+REM Precondition: Android UNLOCKED + paired to the M5 BLE keyboard, sitting
+REM   on the HOME SCREEN. The script opens everything itself - no taps.
+REM
+REM Technique:
+REM   GUI b  = Meta+B -> opens the default browser (stock Android shortcut)
+REM   CTRL t = new tab -> focuses the address bar (omnibox)
+REM   then we type the video URL and hit Enter.
+REM
+REM NOTE: hardware-keyboard app shortcuts vary by OEM/launcher. If Meta+B
+REM   does nothing, use android-app-launch.txt (launcher search) to open
+REM   Chrome first, then the CTRL t + URL part below.
+REM ===================================================================
+DELAY 2500
+GUI b
+DELAY 4500
+CTRL t
+DELAY 1800
+REM Put your lab video/page URL here (left blank so no link ships in the repo).
+REM e.g.  STRING https://www.youtube.com/watch?v=VIDEO_ID
+STRING
+ENTER
+REM Mobile web may need one tap to start playback; loading the video is the
+REM autonomous part. Bump the DELAYs if your phone/network is slow.

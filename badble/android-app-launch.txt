@@ -1,0 +1,26 @@
+REM ===================================================================
+REM android-app-launch.txt - SELF-CONTAINED app launcher via home search
+REM Authorized LOCAL LAB test only (your own Android device).
+REM
+REM Precondition: Android UNLOCKED + paired, on the HOME SCREEN with a
+REM   launcher that opens app search when you start typing (Pixel, Nova,
+REM   Lawnchair, most stock launchers).
+REM
+REM Technique: type the app name -> the launcher's search surfaces it ->
+REM   Enter opens the top hit. Edit the STRING to whatever you want to open
+REM   (Chrome, Keep, Settings, Maps, ...).
+REM
+REM If typing on the home screen does NOT trigger search on your launcher,
+REM   this method won't work there - use the Meta-key shortcuts instead
+REM   (see android-browser-video.txt).
+REM ===================================================================
+DELAY 2500
+STRING Chrome
+DELAY 1500
+ENTER
+STRING Chrome
+DELAY 1500
+ENTER
+STRING Chrome
+DELAY 1500
+ENTER
