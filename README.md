@@ -1,6 +1,19 @@
-# 🦾 M5StickC Plus2 — Bruce Workspace
+<h1 align="center">🦾 M5StickC Plus2 — Bruce Workspace</h1>
 
-> A pentest multitool that fits on your keychain — plus the field notes to actually drive it.
+<p align="center"><em>A pentest multitool that fits on your keychain — plus the field notes to actually drive it.</em></p>
+
+<p align="center">
+  <img src="images/M5StickCPlus2.png" alt="M5StickC Plus2 running Bruce firmware" width="360">
+</p>
+
+<p align="center">
+  <img alt="Firmware" src="https://img.shields.io/badge/firmware-Bruce_v1.15-F7931E">
+  <img alt="MCU" src="https://img.shields.io/badge/MCU-ESP32--PICO--V3--02-2C3E50">
+  <img alt="Host" src="https://img.shields.io/badge/host-Kali_Linux-557C94?logo=kalilinux&logoColor=white">
+  <img alt="Use" src="https://img.shields.io/badge/use-authorized_only-C1121F">
+</p>
+
+<hr>
 
 A complete workspace for an **M5StickC Plus2** (ESP32) running the
 **[Bruce](https://github.com/pr3y/Bruce)** firmware, controlled from **Kali Linux**

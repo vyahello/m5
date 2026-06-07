@@ -1,0 +1,147 @@
+REM ===================================================================
+REM screenshot-trigger-macos.txt  -  press the M5 button => 1 screenshot
+REM   on the PAIRED macOS target (Bad-BLE HID keyboard).
+REM   Authorized LOCAL LAB use only (your own device / written permission).
+REM
+REM HOW IT WORKS
+REM   The M5 advertises as a BLE keyboard ("Keyboard_xxxxx"). Pair it from
+REM   the target, keep the target UNLOCKED, then each WAIT_FOR_BUTTON_PRESS
+REM   below pauses until you press the M5 (front/Select) button - and then
+REM   the screenshot hotkey is sent. So: 1 M5 press = 1 screenshot.
+REM   This file gives 20 triggered captures, then ends - relaunch for more.
+REM   Press the side/power button to abort the run.
+REM
+REM TARGET: macOS
+REM   Hotkey: GUI SHIFT 3
+REM   (Cmd+Shift+3 -> saves a full-screen PNG to the Desktop. Fully hands-off.)
+REM   Fallback: Use  GUI SHIFT 4  for an interactive region grab instead.
+REM
+REM PLATFORM REALITY (classic ESP32, BLE 4.2)
+REM   Windows / Linux / macOS pair as a BLE keyboard  -> this works.
+REM   iPhone / iPad will NOT enumerate the keyboard    -> not supported.
+REM   Android pairs, but its screenshot is Power+VolDown (PHYSICAL keys),
+REM     with no standard hardware-keyboard shortcut     -> use a PC target.
+REM ===================================================================
+DEFAULT_DELAY 200
+REM give yourself a moment after launching before the first trigger
+DELAY 1500
+
+REM --- capture 1 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 2 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 3 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 4 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 5 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 6 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 7 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 8 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 9 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 10 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 11 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 12 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 13 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 14 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 15 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 16 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 17 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 18 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 19 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400
+
+REM --- capture 20 of 20 ---
+WAIT_FOR_BUTTON_PRESS
+GUI SHIFT 3
+REM small settle/debounce so one press = one shot
+DELAY 400

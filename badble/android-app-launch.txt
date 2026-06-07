@@ -1,26 +1,63 @@
 REM ===================================================================
-REM android-app-launch.txt - SELF-CONTAINED app launcher via home search
+REM android-app-launch.txt - SELF-CONTAINED launcher demo
 REM Authorized LOCAL LAB test only (your own Android device).
+REM
+REM What it does: opens Chrome three times, then opens TikTok - each launch
+REM   via home-screen type-to-search.
 REM
 REM Precondition: Android UNLOCKED + paired, on the HOME SCREEN with a
 REM   launcher that opens app search when you start typing (Pixel, Nova,
 REM   Lawnchair, most stock launchers).
 REM
-REM Technique: type the app name -> the launcher's search surfaces it ->
-REM   Enter opens the top hit. Edit the STRING to whatever you want to open
-REM   (Chrome, Keep, Settings, Maps, ...).
+REM Technique: type the app name -> launcher search surfaces it -> ENTER
+REM   opens the top hit. Between launches we send ESC (= Android Back) twice
+REM   to return to the home screen so the next search works.
 REM
-REM If typing on the home screen does NOT trigger search on your launcher,
-REM   this method won't work there - use the Meta-key shortcuts instead
-REM   (see android-browser-video.txt).
+REM CAVEATS (tune per phone):
+REM   - Returning home via ESC/Back is best-effort and device dependent; if
+REM     it lands somewhere else, add/remove ESC lines or raise the DELAYs.
+REM   - "Opening" an already-open app just foregrounds it (no new instance).
+REM   - If home-screen typing does NOT trigger search on your launcher, this
+REM     method won't work there - use the Meta-key shortcuts instead
+REM     (see android-browser-video.txt). Edit the STRING app names freely.
 REM ===================================================================
 DELAY 2500
+
+REM --- Chrome (1) ---
 STRING Chrome
-DELAY 1500
+DELAY 1200
 ENTER
-STRING Chrome
+DELAY 3000
+
+REM back to home
+ESC
+DELAY 400
+ESC
 DELAY 1500
+
+REM --- Chrome (2) ---
+STRING Chrome
+DELAY 1200
 ENTER
-STRING Chrome
+DELAY 3000
+
+ESC
+DELAY 400
+ESC
 DELAY 1500
+
+REM --- Chrome (3) ---
+STRING Chrome
+DELAY 1200
+ENTER
+DELAY 3000
+
+ESC
+DELAY 400
+ESC
+DELAY 1500
+
+REM --- TikTok ---
+STRING TikTok
+DELAY 1200
 ENTER

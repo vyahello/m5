@@ -71,8 +71,35 @@ Cmd, `CTRL`). Edit the `STRING` lines freely — e.g. point a URL at your own bo
 | File | Does | Technique |
 |------|------|-----------|
 | `android-browser-video.txt` | opens browser + new tab, loads a URL you set (blank by default) | `GUI b` (Meta+B) → `CTRL t` → type URL |
-| `android-app-launch.txt` | opens an app by name (set to Chrome) | type on home screen → launcher search → `ENTER` |
+| `android-app-launch.txt` | opens Chrome 3× then TikTok (repeated-launch demo) | launcher search per app, `ESC`×2 to home between |
 | `android-notes-write.txt` | opens Google Keep and types a note | launcher-search "Keep" → type |
+| `android-flashlight.txt` | **best-effort** torch toggle (experimental) | launcher-search "Flashlight" / Assistant — device-dependent |
+
+**Button-triggered** — `WAIT_FOR_BUTTON_PRESS`: the M5 pauses on each step and
+fires the OS **screenshot hotkey** only when you press the M5 (front/Select) button.
+**One M5 press = one screenshot on the paired target.** Each file gives 20 triggered
+captures then ends (relaunch for more); side/power button aborts.
+
+| File | Target | Hotkey sent | Result |
+|------|--------|-------------|--------|
+| `screenshot-trigger-windows.txt` | Windows | `GUI PRINTSCREEN` (Win+PrtScn) | full-screen PNG → `Pictures\Screenshots` |
+| `screenshot-trigger-macos.txt` | macOS | `GUI SHIFT 3` (Cmd+Shift+3) | full-screen PNG → Desktop |
+| `screenshot-trigger-linux.txt` | Linux (GNOME) | `PRINTSCREEN` | GNOME screenshot → Pictures |
+| `screenshot-trigger-android.txt` | **Android 14+** | `GUI s` (Search+S) | system screenshot → Pictures/Screenshots |
+
+> **Android needs 14+.** Android 14 added **Search+S** as the hardware-keyboard
+> screenshot shortcut — and the Search key *is* the Meta key, so duckyscript `GUI s`
+> triggers it (Bad-BLE pairs fine on Android). **Pre-14 / some OEM skins have no
+> keyboard screenshot key** (it's the physical Power+Vol-Down) — there, fall back to
+> Google Assistant ("take a screenshot"). **iOS never enumerates the keyboard**, so
+> there's no iPhone/iPad variant. On Windows, if `GUI PRINTSCREEN` does nothing on
+> your build, swap the `SCREENSHOT` lines to `GUI-SHIFT s` (Win+Shift+S snip).
+
+> **`android-flashlight.txt` is experimental.** There's no standard keyboard
+> shortcut for the torch — it's only reachable via a Flashlight app/search toggle or
+> Google Assistant (`turn on flashlight`), both phone-dependent. **Restarting the
+> phone is *not* possible via BLE HID** (no key path; Assistant refuses; power menu
+> is physical) — to reboot the *M5 stick* use `./tools/bruce-cmd.sh "power reboot"`.
 
 > **Android shortcuts vary by OEM/launcher.** `GUI b`=open-browser and home-screen
 > type-to-search work on stock/Pixel/Nova but not everywhere — if one method is dead

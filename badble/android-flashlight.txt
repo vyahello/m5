@@ -1,0 +1,26 @@
+REM ===================================================================
+REM android-flashlight.txt - best-effort: turn on the flashlight (lihtar)
+REM Authorized LOCAL LAB test only (your own Android device).
+REM
+REM IMPORTANT: there is NO standard keyboard shortcut to toggle the torch.
+REM   A BLE keyboard can only reach it indirectly, and it is phone-dependent:
+REM   - Google Assistant CAN toggle it ("turn on flashlight") - but you must
+REM     reach Assistant's TEXT input, which varies by device.
+REM   - Some phones/launchers surface a "Flashlight"/"Torch" app or a search
+REM     result with a toggle (which may still need one tap).
+REM   Treat this as experimental; tune per device.
+REM
+REM Precondition: Android UNLOCKED + paired, on the HOME SCREEN, launcher
+REM   does type-to-search.
+REM
+REM Method A (this script): home-search "Flashlight" + ENTER -> opens a torch
+REM   app or a search result. If it lands on an app, the torch may toggle on
+REM   open; if it lands on a toggle, you may need a single tap.
+REM
+REM Method B: if your phone opens an Assistant text box, change the search
+REM   term below to:   turn on flashlight   (Assistant then toggles it).
+REM ===================================================================
+DELAY 2500
+STRING Flashlight
+DELAY 1500
+ENTER
