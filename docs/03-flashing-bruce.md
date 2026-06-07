@@ -86,8 +86,9 @@ esptool --port $PORT --baud 921600 read-flash 0x0 0x800000 firmware/m5-bruce-ful
 > over it without one). To return to the factory demo you'd need an official M5
 > image (e.g. via **M5Burner**) — these backups restore *Bruce*, not the factory.
 
-> 💡 These `.bin` files are large; if this workspace becomes a git repo, add
-> `firmware/*.bin` to `.gitignore`.
+> 💡 The `.bin` images are large and **gitignored** (`firmware/*.bin`) — they stay
+> local. Recreate the app image from the [Bruce releases](https://github.com/pr3y/Bruce/releases);
+> recreate the full snapshot with the `read-flash` command above.
 
 ## Gotchas
 

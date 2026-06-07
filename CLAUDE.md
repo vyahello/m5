@@ -21,10 +21,14 @@ Docs in `docs/`, helper scripts in `tools/`, JS apps in `apps/`, firmware in
 ```
 docs/      01-device · 02-connecting · 03-flashing-bruce · 04-using-bruce ·
            05-troubleshooting · 06-pentesting · 07-tips-and-tricks
-firmware/  Bruce-m5stack-cplus2.bin   (Bruce 1.15, StickC Plus2, flash @ 0x0)
-tools/     free-port.sh bruce-cmd.sh bruce-shell.sh bruce-put.sh bruce-rm.sh melody.sh
+firmware/  Bruce-m5stack-cplus2.bin (flash @ 0x0) + full 8MB snapshot
+           — *.bin gitignored, large
+tools/     free-port.sh bruce-cmd.sh bruce-shell.sh bruce-put.sh bruce-get.sh
+           bruce-rm.sh portals-set-ap.sh melody.sh
 apps/      hello.js demo.js watchface.js wifi-connect.js + games/
-venv/      esptool v5.3.0 + pyserial
+portals/   Evil Portal HTML templates (→ /PortalTemplates on the device)
+venv/      esptool v5.3.0 + pyserial — gitignored
+loot/      captures pulled off the device — gitignored (client evidence)
 ```
 
 Scripts compute `ROOT` (repo root) and find `venv/` + `free-port.sh` by absolute
@@ -68,6 +72,12 @@ relative file args (e.g. `apps/hello.js`).
   dumps the LittleFS partition (cached `/tmp/bruce-littlefs.bin`, `--redump` to
   refresh) + littlefs-python extracts — byte-exact, the way to pull pcaps over USB.
 - `bruce-rm.sh <device-path> [...]` — delete file(s) (`storage remove -filepath`).
+- `portals-set-ap.sh <AP_NAME> [file ...]` — bake the magic first line
+  `<!-- AP="..." -->` (Evil Portal rogue-AP SSID) into `portals/*.html` (idempotent —
+  swaps, never stacks) + push to `/PortalTemplates/`. `--clear` (or `--none`) instead
+  of a name **removes** the AP line (no baked SSID → Bruce default / on-device prompt).
+  Env `PUSH=0` (edit local only), `DESTDIR` (device folder). Validates SSID ≤32 chars,
+  no `"`.
 - `melody.sh [twinkle|mario|zelda|scale|"C4:300 ..."]` — play tunes on the buzzer.
 
 ## Bruce specifics (learned & verified)

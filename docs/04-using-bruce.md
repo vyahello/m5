@@ -1,4 +1,4 @@
-# 10. Using Bruce firmware
+# 4. Using Bruce firmware
 
 Your device now runs **Bruce v1.15** (confirmed over serial: `Device: M5StickC
 Plus2`). This is the full usage guide: launching, the menus, the serial command
@@ -122,9 +122,9 @@ screen /dev/ttyACM0 115200        # type a command, Enter; exit with Ctrl-A K Y
 
 ```bash
 # one-shot with busybox microcom
-echo "say hi" | busybox microcom -s 115200 /dev/ttyACM0 -t 1000
+echo "info" | busybox microcom -s 115200 /dev/ttyACM0 -t 1000
 # over the network once the WebUI is running (see §4)
-curl -XPOST "http://bruce.local/cm" -d "cmnd=say hi"
+curl -XPOST "http://bruce.local/cm" -d "cmnd=info"
 ```
 
 ### Command reference (the important ones)
@@ -355,12 +355,14 @@ Bruce commands, not Python.
   ./tools/free-port.sh && source venv/bin/activate
   esptool --port /dev/ttyACM0 --baud 921600 write-flash 0x0 firmware/Bruce-m5stack-cplus2.bin
   ```
-- **Back to factory** (only if you saved a backup — see [03-flashing-bruce.md](03-flashing-bruce.md)):
+- **Restore the configured device** from the full 8 MB snapshot (settings + Wi-Fi +
+  `/scripts`) — see [03-flashing-bruce.md](03-flashing-bruce.md):
   ```bash
   ./tools/free-port.sh && source venv/bin/activate
-  esptool --port /dev/ttyACM0 erase-flash
-  esptool --port /dev/ttyACM0 --baud 921600 write-flash 0x0 m5stickcplus2-factory-full-8MB.bin
+  esptool --port /dev/ttyACM0 --baud 921600 write-flash 0x0 firmware/m5-bruce-full-8MB-20260606.bin
   ```
+  > There is **no M5 factory backup** — these images restore *Bruce*, not the
+  > original demo. For factory, reflash via **M5Burner**.
 
 ---
 
@@ -375,5 +377,6 @@ Bruce commands, not Python.
 | `./tools/bruce-rm.sh <device-path> [...]` | delete one or more files from Bruce storage |
 | `./tools/bruce-shell.sh` | interactive serial console — type commands live (exit: Ctrl-]) |
 | `./tools/melody.sh [twinkle\|mario\|zelda\|scale\|"C4:300 ..."]` | play a melody on the buzzer via `tone` |
+| `./tools/portals-set-ap.sh <AP_NAME> [file ...]` | set the Evil Portal AP SSID on `portals/*.html` and push them (see [06-pentesting.md](06-pentesting.md)) |
 
 Full docs: <https://wiki.bruce.computer/> · Source: <https://github.com/pr3y/Bruce>

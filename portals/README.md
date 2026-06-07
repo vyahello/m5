@@ -43,27 +43,34 @@ handling (masking / verify mode per Config).
 - **Captured creds** are written to `<template-name>_creds.csv` (Evil Portal creds
   dir). Pull them off with the Web UI file manager or
   `./tools/bruce-cmd.sh "storage read /..._creds.csv"`.
-- **Auto-name the rogue AP:** make the template's **first line**
-  `<!-- AP="Free_WiFi" -->` and Bruce sets the AP SSID to `Free_WiFi` automatically.
+- **Auto-name the rogue AP:** the template's **first line** `<!-- AP="Free_WiFi" -->`
+  makes Bruce set the AP SSID to `Free_WiFi` automatically. The
+  `tools/portals-set-ap.sh` script writes/updates that line for you (below).
 
 ## Deploy to the device
 
-Upload to `/PortalTemplates/` (any folder works — Bruce's "Custom Html" picker
-browses from `/`):
+Templates upload to `/PortalTemplates/` (any folder works — Bruce's "Custom Html"
+picker browses from `/`).
+
+**Easiest — set the AP name and push all pages at once:**
 
 ```bash
-# one file
-./tools/bruce-put.sh portals/tp-link.html /PortalTemplates/tp-link.html
+./tools/portals-set-ap.sh Test_AP            # bake AP="Test_AP" into every page + upload
+./tools/portals-set-ap.sh Coffee portals/google.html   # one page, custom SSID
+./tools/portals-set-ap.sh --clear            # remove the baked AP name (Bruce default / asks on-device)
+PUSH=0 ./tools/portals-set-ap.sh Test_AP     # edit local only, don't upload
+```
 
-# all of them
-for f in portals/*.html; do
-  ./tools/bruce-put.sh "$f" "/PortalTemplates/$(basename "$f")"
-done
+**Manual — upload as-is with `bruce-put.sh`:**
+
+```bash
+./tools/bruce-put.sh portals/tp-link.html /PortalTemplates/tp-link.html   # one file
+for f in portals/*.html; do ./tools/bruce-put.sh "$f" "/PortalTemplates/$(basename "$f")"; done
 ```
 
 Then on the device: **WiFi → WiFi Atks → Evil Portal → Custom Html** → pick the
-file → set/confirm the AP name → run. (For Karma/Clone, the same Custom Html page
-backs the portal stage.)
+file → confirm the AP name → run. (For Karma/Clone, the same Custom Html page
+backs the portal stage.) Full attack chain: [docs/06-pentesting.md §3.6](../docs/06-pentesting.md#36-chained-playbook--deauth--karma--evil-portal).
 
 > 3 MB LittleFS — all 13 pages total ~75 KB, no space concern. Prune captured
 > `*_creds.csv` between engagements (`./tools/bruce-rm.sh`).
