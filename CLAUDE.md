@@ -24,7 +24,7 @@ docs/      01-device · 02-connecting · 03-flashing-bruce · 04-using-bruce ·
 firmware/  Bruce-m5stack-cplus2.bin (flash @ 0x0) + full 8MB snapshot
            — *.bin gitignored, large
 tools/     free-port.sh bruce-cmd.sh bruce-shell.sh bruce-put.sh bruce-get.sh
-           bruce-rm.sh portals-set-ap.sh melody.sh
+           bruce-rm.sh portals-set-ap.sh melody.sh rfid125.sh
 apps/      hello.js demo.js watchface.js wifi-connect.js + games/
 portals/   Evil Portal HTML templates (→ /PortalTemplates on the device)
 badble/    Bad-BLE HID duckyscript payloads (phone testing; benign, lab-safe)
@@ -80,6 +80,11 @@ relative file args (e.g. `apps/hello.js`).
   Env `PUSH=0` (edit local only), `DESTDIR` (device folder). Validates SSID ≤32 chars,
   no `"`.
 - `melody.sh [twinkle|mario|zelda|scale|"C4:300 ..."]` — play tunes on the buzzer.
+- `rfid125.sh [selftest|<secs>]` — verify a 125 kHz RFID reader (RDM6300/HW-205) over
+  USB: `info` + wiring self-test (internal pulldown on RFID **RX=G33**/**TX=G32**; a
+  powered RDM6300 holds G33 HIGH) + live read test (zeros on G33 while a fob is present
+  = tag data). Does **not** decode the UID — read that on-device via **RFID → Read
+  125kHz**. Env `PORT`/`RXPIN`/`TXPIN`/`SECS`. See [docs/06-pentesting §10.1](docs/06-pentesting.md).
 
 ## Bruce specifics (learned & verified)
 
